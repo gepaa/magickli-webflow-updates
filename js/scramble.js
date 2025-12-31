@@ -24,6 +24,9 @@ class ScrambleText {
     }
 
     setText(newText) {
+        // If already animating, do not restart to prevent infinite loop
+        if (this.frameRequest) return Promise.resolve();
+
         const oldText = this.element.innerText;
         const length = Math.max(oldText.length, newText.length);
         const promise = new Promise((resolve) => this.resolve = resolve);
@@ -37,7 +40,6 @@ class ScrambleText {
             this.queue.push({ from, to, start, end });
         }
 
-        cancelAnimationFrame(this.frameRequest);
         this.frame = 0;
         this.update();
         return promise;
@@ -68,6 +70,7 @@ class ScrambleText {
 
         if (complete === this.queue.length) {
             this.resolve();
+            this.frameRequest = null;
         } else {
             this.frameRequest = requestAnimationFrame(this.update);
             this.frame++;
