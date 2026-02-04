@@ -7,146 +7,382 @@
     align-items: center;
     overflow: hidden;
     padding: 100px 0;
-    perspective: 1000px;
+    perspective: 1200px;
+    background-color: #000;
 }
 
-/* Wrapper for the window effect - Now acting as a container for scattered cards */
+/* --- SUPER REALISTIC WOOD FRAME --- */
+/* --- SUPER REALISTIC WOOD FRAME --- */
 .window-container {
     position: relative;
-    width: 90%;
-    max-width: 1200px;
-    height: 700px;
-    /* Taller for better spacing */
-    margin: 0 auto;
-    /* Removed the "Window Frame" look to be more "Desktop" like or just a clean section */
-    /* The user said "main house window... desktop looking hill". I will keep the background but clean up the frame. */
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    overflow: visible;
-    /* Allow popouts */
+    width: 65%;
+    max-width: 950px;
+    height: 580px;
+    margin: 60px auto;
+    z-index: 10;
+
+    /* Mahogany Base Color */
+    background-color: #2b140e;
+
+    /* Frame Dimensions */
+    padding: 30px;
+    border-radius: 6px;
+    box-sizing: border-box;
+
+    /* 
+      SURREAL REALISM WOOD TEXTURE
+      Finer grain and realistic wood noise
+    */
+    background-image:
+        /* High-res grain lines */
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, 0.08) 0px,
+            rgba(0, 0, 0, 0.12) 1px,
+            transparent 1px,
+            transparent 3px),
+        /* Organic wood noise filter emulation */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
+        radial-gradient(ellipse at 30% 30%, rgba(98, 48, 30, 0.3) 0%, transparent 70%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, transparent 40%, rgba(0, 0, 0, 0.25) 100%),
+        linear-gradient(to bottom right, #3d1b11, #1e0b06);
+
+    /* 
+      SHARP BEVELS & PHYSICAL DEPTH
+    */
+    box-shadow:
+        /* Crisp outer edge highlight */
+        inset 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.2),
+        inset -0.5px -0.5px 0.5px rgba(0, 0, 0, 0.4),
+
+        /* Convex moulding bevel */
+        inset 4px 4px 12px rgba(0, 0, 0, 0.4),
+        inset -4px -4px 12px rgba(0, 0, 0, 0.7),
+
+        /* Deep recess groove */
+        inset 18px 18px 2px rgba(15, 6, 3, 0.7),
+        inset -18px -18px 2px rgba(15, 6, 3, 0.7),
+
+        /* Ambient occlusion shadow on glass */
+        inset 0 0 60px rgba(0, 0, 0, 1),
+
+        /* External wall interaction shadows */
+        0 40px 120px rgba(0, 0, 0, 0.95),
+        0 15px 40px rgba(0, 0, 0, 0.82);
+
+    border: 1px solid #120604;
 }
 
-/* The View (Bliss + Video) - Background for the section */
+/* 
+   INNER GOLD/BRASS TRIM ACCENT 
+   A subtle metallic line inside the wood frame for premium feel
+*/
+.window-container::after {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    right: 25px;
+    bottom: 25px;
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    /* Subtle gold */
+    box-shadow:
+        0 0 2px rgba(255, 215, 0, 0.1),
+        inset 0 0 2px rgba(255, 215, 0, 0.1);
+    pointer-events: none;
+    z-index: 12;
+    border-radius: 2px;
+}
+
+/* Frame outer highlight pseudo-elements (Refined for 3D) */
+.window-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* Specular highlight on very outer edge */
+    z-index: 11;
+    pointer-events: none;
+}
+
+/* Glass Viewport Area */
 .window-view {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    overflow: hidden;
-    /* Optional: Vignette */
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
-}
-
-/* Bliss Background */
-.bliss-bg {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
+    background: #000;
+    overflow: hidden;
+    /* Deep shadow inside the frame to sink the glass */
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 1);
+    border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
-/* Sky */
-.bliss-sky {
+/* 
+   GLASS REFLECTION LAYER 
+   Diagonal sheen to simulate a window pane
+*/
+.window-view-reflection {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 65%;
-    background: linear-gradient(180deg, #2b9aff 0%, #84c9ff 100%);
-}
-
-/* Clouds */
-.cloud {
-    position: absolute;
-    background: #fff;
-    border-radius: 100px;
-    opacity: 0.9;
-    filter: blur(5px);
-}
-
-.cloud:nth-child(1) {
-    width: 200px;
-    height: 60px;
-    top: 15%;
-    left: 10%;
-    opacity: 0.7;
-}
-
-.cloud:nth-child(2) {
-    width: 300px;
-    height: 80px;
-    top: 25%;
-    right: 15%;
-    opacity: 0.6;
-}
-
-.cloud:nth-child(3) {
-    width: 150px;
-    height: 40px;
-    top: 45%;
-    left: 40%;
-    opacity: 0.4;
-}
-
-/* Hill */
-.bliss-hill {
-    position: absolute;
-    bottom: -10%;
-    left: -10%;
-    width: 120%;
-    height: 45%;
-    background: linear-gradient(180deg, #74d44c 0%, #46a11a 100%);
-    border-radius: 50% 50% 0 0 / 20% 20% 0 0;
-    box-shadow: inset 0 20px 40px rgba(255, 255, 255, 0.3);
-}
-
-/* Polaroids Container */
-.polaroids-overlay {
-    position: relative;
-    width: 100%;
     height: 100%;
-    z-index: 20;
     pointer-events: none;
+    /* Let clicks pass through */
+    z-index: 15;
+    /* Above content, below muntins if desired, or above everything? Usually glass is top. */
+    background: linear-gradient(115deg,
+            transparent 35%,
+            rgba(255, 255, 255, 0.05) 43%,
+            rgba(255, 255, 255, 0.12) 50%,
+            rgba(255, 255, 255, 0.05) 57%,
+            transparent 65%);
+    opacity: 0.7;
+    mix-blend-mode: overlay;
+    /* Blends nicely with dark backgrounds */
 }
 
-/* Polaroid Item - Professional Look */
+/* --- CROSSBARS (Muntins) --- */
+/* Refined to look like wood */
+.window-view::before,
+/* .window-view::after is reserved for horizontal bar, using dedicated elements is safer if pseudo-elements get crowded, 
+   but original code used ::before/::after. 
+   Wait, if I use a dedicated reflection div, I don't need to change this structure too much, 
+   but I need to make sure existing ::before/::after on .window-view aren't conflicting. 
+   Original code: .window-view::before (vert), .window-view::after (horiz).
+   I will keep that, but refine the style.
+*/
+.window-view::after {
+    content: '';
+    position: absolute;
+    background: #1a0f08;
+    /* Dark wood match */
+    z-index: 10;
+    box-shadow:
+        0 0 10px rgba(0, 0, 0, 0.9),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.05);
+    /* Slight bevel */
+}
+
+/* Vertical Bar */
+.window-view::before {
+    width: 16px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Wood texture for muntins */
+    background-image: linear-gradient(90deg, #150804, #2a120a, #150804);
+}
+
+/* Horizontal Bar */
+.window-view::after {
+    width: 100%;
+    height: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Wood texture for muntins */
+    background-image: linear-gradient(180deg, #150804, #2a120a, #150804);
+}
+
+
+/* --- CINEMATIC WASH BACKGROUND --- */
+.bliss-bg {
+    position: absolute;
+    inset: 0;
+    /* Red/Orange Warm Wash as requested by Kevin */
+    background: linear-gradient(135deg,
+            #4a150a 0%,
+            /* Deep Mahogany/Red */
+            #8b2e16 25%,
+            /* Burnt Orange-Red */
+            #d65d2a 50%,
+            /* Vibrant Sunset Orange */
+            #e88d45 75%,
+            /* Golden Hour Glow */
+            #f2b063 100%
+            /* Soft Warm Amber */
+        );
+    z-index: 1;
+}
+
+/* Atmospheric Dust/Particles instead of Stars */
+.bliss-sky {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(1.5px 1.5px at 15% 15%, rgba(255, 255, 255, 0.4) 50%, transparent),
+        radial-gradient(1.5px 1.5px at 85% 25%, rgba(255, 255, 255, 0.4) 50%, transparent),
+        radial-gradient(2px 2px at 45% 45%, rgba(255, 255, 255, 0.3) 50%, transparent),
+        radial-gradient(1.5px 1.5px at 25% 75%, rgba(255, 255, 255, 0.4) 50%, transparent),
+        radial-gradient(2.5px 2.5px at 75% 85%, rgba(255, 255, 255, 0.3) 50%, transparent);
+    background-size: 400px 400px;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    animation: drift 20s linear infinite;
+}
+
+@keyframes drift {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-50px);
+    }
+}
+
+/* Glass reflection now handled by .window-view-reflection in HTML */
+
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+/* Hiding old elements that we don't need */
+.cloud,
+.bliss-hill {
+    display: none;
+}
+
+/* --- POLAROIDS --- */
+/* --- POLAROIDS --- */
 .polaroid {
     position: absolute;
-    background: #fff;
-    padding: 12px 12px 45px 12px;
-    /* Bottom padding for text */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    width: 220px;
-    /* Larger */
-    height: auto;
-    transform: rotate(var(--rot)) scale(1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: #fcfaf5;
+    /* Slightly aged off-white */
+    padding: 15px 15px 60px 15px;
+    width: 240px;
+    /* Significantly larger */
+    border-radius: 2px;
+    box-sizing: border-box;
+    z-index: 20;
     cursor: pointer;
     pointer-events: auto;
-    text-align: center;
-    border-radius: 2px;
+
+    /* Apply rotation variable */
+    transform: rotate(var(--rot));
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* High-End Physical Shadows */
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.4),
+        /* Contact shadow */
+        0 20px 40px rgba(0, 0, 0, 0.25),
+        /* Soft ambient */
+        inset 0 0 1px rgba(255, 255, 255, 0.8);
+    /* Edge highlight */
 }
 
-/* Hover Effect: Zoom & Straighten */
+/* Specific Positions for 6 Cards - Off Window */
+/* Left Side Wall */
+.p-left-1 {
+    top: 5%;
+    left: 2%;
+    /* On the left wall */
+    --rot: -5deg;
+}
+
+.p-left-2 {
+    top: 45%;
+    left: 1%;
+    --rot: 3deg;
+}
+
+.p-left-3 {
+    top: 82%;
+    left: 3%;
+    --rot: -2deg;
+}
+
+/* Right Side Wall */
+.p-right-1 {
+    top: 8%;
+    right: 2%;
+    /* On the right wall */
+    --rot: 4deg;
+}
+
+.p-right-2 {
+    top: 48%;
+    right: 1%;
+    --rot: -3deg;
+}
+
+.p-right-3 {
+    top: 88%;
+    right: 3%;
+    --rot: 5deg;
+}
+
+/* Real Paper Texture & Bevel using SVG Noise */
+.polaroid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* CSS Gradient-based noise for texture without external images */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.12;
+    pointer-events: none;
+    z-index: 5;
+    mix-blend-mode: multiply;
+    border-radius: 3px;
+}
+
+/* Scotch Tape Effect - Refined */
+.polaroid::after {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    width: 60px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateX(-50%) rotate(-1.5deg);
+
+    /* Tape Visuals */
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.1),
+        inset 0 0 1px rgba(255, 255, 255, 0.3);
+
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Serrated edge simulation */
+    mask-image: linear-gradient(90deg, transparent 2px, black 2px),
+        linear-gradient(to right, transparent 2px, black 2px);
+    mask-size: 4px 100%;
+
+    z-index: 10;
+    opacity: 0.8;
+}
+
 .polaroid:hover {
-    transform: rotate(0deg) scale(1.3);
     z-index: 100 !important;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: scale(1.2) rotate(0deg) translateZ(50px) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
 }
 
 /* Image/Video Container */
 .polaroid-media {
     width: 100%;
     aspect-ratio: 1/1;
-    /* Square */
     background: #000;
     position: relative;
     overflow: hidden;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .polaroid-img {
@@ -154,6 +390,7 @@
     height: 100%;
     object-fit: cover;
     transition: opacity 0.3s ease;
+    filter: sepia(0.05) contrast(1.05);
 }
 
 /* Video Iframe (Injected via JS) */
@@ -167,19 +404,117 @@
     z-index: 10;
 }
 
-/* Marker Text - Clean Professional Font */
+/* --- THE SHARPIE EFFECT --- */
+/* --- THE SHARPIE EFFECT --- */
 .polaroid-text {
-    font-family: 'Jost', sans-serif;
-    /* Professional, consistent */
-    font-weight: 500;
-    font-size: 14px;
-    color: #222;
-    margin-top: 15px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 22px;
+    /* Larger text */
+    color: #0a0a0a;
+    margin-top: 18px;
+    text-align: center;
+    opacity: 0.92;
+    filter: blur(0.35px);
+    text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.15);
+    letter-spacing: -0.5px;
+    transform: rotate(-1deg);
+}
+
+/* Main Video Player Container */
+.main-video-player {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: #000;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.main-video-player.active {
+    opacity: 1;
+}
+
+.main-video-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 /* Hide the old window video container we aren't using anymore */
 #window-video-container {
     display: none !important;
+}
+
+@media (max-width: 1200px) {
+    .window-container {
+        width: 70%;
+        /* Reduced to make room for cards */
+    }
+
+    .polaroid {
+        width: 140px;
+        /* Scaled down slightly */
+        padding-bottom: 35px;
+    }
+
+    .polaroid-text {
+        font-size: 14px;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 900px) {
+    .window-container {
+        width: 60%;
+    }
+
+    .polaroid {
+        width: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section.celebs {
+        padding: 50px 0;
+    }
+
+    .window-container {
+        width: 95%;
+        height: 400px;
+        border-width: 25px;
+    }
+
+    .polaroid {
+        position: relative;
+        margin: 20px auto;
+        transform: rotate(var(--rot)) !important;
+        /* Allow some scatter on mobile if desired, or set to none */
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        width: 180px;
+    }
+
+    /* Reset positions for mobile */
+    .p-left-1,
+    .p-left-2,
+    .p-left-3,
+    .p-right-1,
+    .p-right-2,
+    .p-right-3 {
+        top: auto;
+        left: auto;
+        right: auto;
+    }
+
+    .polaroids-overlay {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        height: auto;
+        position: relative;
+        padding-top: 40px;
+    }
 }

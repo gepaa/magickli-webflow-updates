@@ -24,7 +24,8 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
   <link href="css/webflow.css" rel="stylesheet" type="text/css">
-  <link href="css/magickli.webflow.css?v=2" rel="stylesheet" type="text/css">
+  <link href="css/magickli.webflow.css?v=10" rel="stylesheet" type="text/css">
+  <link href="css/window-polaroid-styles.css" rel="stylesheet" type="text/css">
   <style>
     @media (max-width:991px) and (min-width:768px) {
       html.w-mod-js:not(.w-mod-ix) [data-w-id="033c9b8e-82df-edba-7123-847fa238d6ce"] {
@@ -251,6 +252,8 @@
   <div class="section celebs">
     <div class="window-container">
       <div class="window-view">
+        <div id="main-video-player" class="main-video-player"></div>
+        <div class="window-view-reflection"></div>
         <div class="bliss-bg">
           <div class="bliss-sky">
             <div class="cloud"></div>
@@ -260,58 +263,41 @@
           <div class="bliss-hill"></div>
         </div>
       </div>
-      <div class="polaroids-overlay">
-        <!-- Lana Del Rey -->
-        <div class="polaroid" style="top: 10%; left: 5%; --rot: -2deg;"
-          data-video-url="https://www.youtube.com/embed/9JWCXW05SRk">
-          <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/9JWCXW05SRk/0.jpg"
-              alt="Lana Del Rey"></div>
-          <div class="polaroid-text">Lana Del Rey</div>
-        </div>
-        <!-- Michelle Yeoh -->
-        <div class="polaroid" style="top: 50%; left: 10%; --rot: 3deg;"
-          data-video-url="https://www.youtube.com/embed/S2pEa6qE5iM">
-          <div class="polaroid-media"><img class="polaroid-img" src="images/thumbs/yeoh.jpg"
-              onerror="this.src='https://img.youtube.com/vi/S2pEa6qE5iM/0.jpg'" alt="Michelle Yeoh"></div>
-          <div class="polaroid-text">Michelle Yeoh</div>
-        </div>
-        <!-- Seth Green -->
-        <div class="polaroid" style="top: 5%; right: 10%; --rot: 2deg;"
-          data-video-url="https://www.youtube.com/embed/mNvtMWacZos">
-          <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/mNvtMWacZos/0.jpg"
-              alt="Seth Green"></div>
-          <div class="polaroid-text">Seth Green</div>
-        </div>
-        <!-- Kehlani -->
-        <div class="polaroid" style="top: 60%; right: 5%; --rot: -3deg;"
-          data-video-url="https://www.youtube.com/embed/Wpm07-BGJnE">
-          <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/Wpm07-BGJnE/0.jpg"
-              alt="Kehlani"></div>
-          <div class="polaroid-text">Kehlani</div>
-        </div>
-        <!-- French Montana -->
-        <div class="polaroid" style="bottom: 15%; left: 30%; --rot: 1deg;"
-          data-video-url="https://www.youtube.com/embed/smzV5cTEqBs">
-          <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/smzV5cTEqBs/0.jpg"
-              alt="French Montana"></div>
-          <div class="polaroid-text">French Montana</div>
-        </div>
-        <!-- Fall Out Boy -->
-        <div class="polaroid" style="top: 15%; right: 30%; --rot: -2deg;"
-          data-video-url="https://www.youtube.com/embed/fY34WvtuOD8">
-          <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/fY34WvtuOD8/0.jpg"
-              alt="Fall Out Boy"></div>
-          <div class="polaroid-text">Fall Out Boy</div>
-        </div>
-        <!-- Machine Gun Kelly -->
-        <div class="polaroid" style="bottom: 10%; right: 25%; --rot: 2deg;"
-          data-video-url="https://www.youtube.com/embed/wSTMnYd7D14">
-          <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/wSTMnYd7D14/0.jpg"
-              alt="MGK"></div>
-          <div class="polaroid-text">MGK</div>
-        </div>
-      </div>
     </div>
+    <!-- LEFT SIDE POLAROIDS -->
+    <div class="polaroid p-left-1" data-video-id="9JWCXW05SRk">
+      <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/9JWCXW05SRk/0.jpg"
+          alt="Lana Del Rey"></div>
+      <div class="polaroid-text">Lana Del Rey</div>
+    </div>
+    <div class="polaroid p-left-2" data-video-id="S2pEa6qE5iM">
+      <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/S2pEa6qE5iM/0.jpg"
+          alt="Michelle Yeoh"></div>
+      <div class="polaroid-text">Michelle Yeoh</div>
+    </div>
+    <div class="polaroid p-left-3" data-video-id="smzV5cTEqBs">
+      <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/smzV5cTEqBs/0.jpg"
+          alt="French Montana"></div>
+      <div class="polaroid-text">French Montana</div>
+    </div>
+
+    <!-- RIGHT SIDE POLAROIDS -->
+    <div class="polaroid p-right-1" data-video-id="mNvtMWacZos">
+      <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/mNvtMWacZos/0.jpg"
+          alt="Seth Green"></div>
+      <div class="polaroid-text">Seth Green</div>
+    </div>
+    <div class="polaroid p-right-2" data-video-id="fY34WvtuOD8">
+      <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/fY34WvtuOD8/0.jpg"
+          alt="Fall Out Boy"></div>
+      <div class="polaroid-text">Fall Out Boy</div>
+    </div>
+    <div class="polaroid p-right-3" data-video-id="Wpm07-BGJnE">
+      <div class="polaroid-media"><img class="polaroid-img" src="https://img.youtube.com/vi/Wpm07-BGJnE/0.jpg"
+          alt="Kehlani"></div>
+      <div class="polaroid-text">Kehlani</div>
+    </div>
+  </div>
   </div>
   <div class="black-spacer"></div>
   <div class="section foolus">
@@ -507,59 +493,57 @@
   </script>
   <script>
     $(document).ready(function () {
-      // Hover Polaroid -> Play Video INSIDE the card
-      // Use a timeout to prevent rapid firing on accidental swipes
       let hoverTimeout;
 
       $('.polaroid').on('mouseenter', function () {
         const card = $(this);
-        const mediaContainer = card.find('.polaroid-media');
-        const videoUrl = card.data('video-url');
+        const videoId = card.attr('data-video-id');
+        const mainPlayer = $('#main-video-player');
 
-        // Clear any pending clear actions
-        // if (card.data('leaveTimeout')) clearTimeout(card.data('leaveTimeout'));
+        console.log('Hovering over:', card.find('.polaroid-text').text(), 'Video ID:', videoId);
 
-        // Delay slighty to ensure intent (200ms)
+        // Delay slighty to ensure intent (150ms)
         hoverTimeout = setTimeout(() => {
-          // Check if already playing
-          if (mediaContainer.find('iframe').length > 0) return;
-
-          if (videoUrl) {
-            // Add mute/autoplay/modestbranding/playsinline params
-            // origin is important for some embed restrictions
-            const separator = videoUrl.includes('?') ? '&' : '?';
+          if (videoId) {
             const origin = window.location.origin;
-            const mutedUrl = `${videoUrl}${separator}autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&origin=${origin}`;
+            let originParam = (origin && origin !== 'null' && origin !== 'file://') ? `&origin=${origin}` : '';
+
+            // Construct the YouTube Embed URL
+            const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1${originParam}`;
 
             const iframe = $('<iframe>', {
-              src: mutedUrl,
-              class: 'polaroid-iframe',
+              src: embedUrl,
+              class: 'main-video-iframe',
               allow: 'autoplay; encrypted-media; picture-in-picture',
               allowfullscreen: true,
-              frameborder: 0 // explicit
+              frameborder: 0
             });
 
-            // Append iframe
-            mediaContainer.append(iframe);
-            // Fade out image smoothly
-            card.find('.polaroid-img').css('opacity', 0);
+            console.log('Loading iframe:', embedUrl);
+
+            // Update main player
+            mainPlayer.html(iframe);
+            mainPlayer.addClass('active');
           }
-        }, 150); // 150ms delay
+        }, 150);
 
         card.data('hoverTimeout', hoverTimeout);
       });
 
       $('.polaroid').on('mouseleave', function () {
         const card = $(this);
-        const mediaContainer = card.find('.polaroid-media');
+        const mainPlayer = $('#main-video-player');
 
-        // Cancel enter timer if it hasn't fired yet
         if (card.data('hoverTimeout')) clearTimeout(card.data('hoverTimeout'));
 
-        // Remove iframe immediately to stop sound/video
-        mediaContainer.find('iframe').remove();
-        // Restore image
-        card.find('.polaroid-img').css('opacity', 1);
+        mainPlayer.removeClass('active');
+
+        // Wait for fade out to clear content
+        setTimeout(() => {
+          if (!mainPlayer.hasClass('active')) {
+            mainPlayer.empty();
+          }
+        }, 500);
       });
 
     });
